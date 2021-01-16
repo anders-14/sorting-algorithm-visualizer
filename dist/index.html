@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Sorting Algorithm Visualizer</title>
+  </head>
+  <body>
+    <header>
+      <h1>Sorting Algorithm Visualizer</h1>
+    </header>
+    <main>
+      <div id="bar-wrapper"></div>
+      <div id="option-wrapper">
+        <div>
+          <label title="It not a good visulization, but it looks cool" for="fancy-animation-check">Fancy Animations:</label>
+          <input  title="It not a good visulization, but it looks cool" type="checkbox" id="fancy-animation-check" >
+        </div>
+        <div>
+          <label for="number-of-bars">Amount:</label>
+          <input type="range" id="number-of-bars" min="4" max="100" value="50">
+        </div>
+        <button id="regenrate-btn">Regenerate</button>
+        <select id="algo-select">
+          <option value="bubble-sort">Bubble Sort</option>
+          <option value="merge-sort">Merge Sort</option>
+          <option value="selection-sort">Selection Sort</option>
+          <option value="shell-sort">Shell Sort</option>
+        </select>
+        <button id="sort">Sort</button>
+      </div>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
+

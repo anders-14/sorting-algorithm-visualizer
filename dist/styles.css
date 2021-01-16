@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400;900&display=swap');
+
+:root {
+  --bg-color-pri: #222;
+  --bg-color-sec: #444;
+  --fg-color-pri: #eee;
+  --fg-color-sec: #bbb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--bg-color-pri);
+  color: var(--fg-color-pri);
+  width: 100vw;
+}
+
+header h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin: 1rem 0;
+}
+
+#bar-wrapper {
+  width: 80%;
+  max-width: 100rem;
+  height: 50rem;
+  margin: 3rem auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  background: var(--bg-color-sec);
+}
+
+.bar {
+  width: .5rem;
+  margin: .1rem;
+  background: #fff;
+}
+
+.green {
+  background: #00ff00;
+}
+
+.red {
+  background: #ff0000;
+}
+
+.fancy-animation {
+  transition: height .3s;
+}
+
+#option-wrapper {
+  width: 80%;
+  max-width: 100rem;
+  height: 10rem;
+  margin: 3rem auto;
+  background: var(--bg-color-sec);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#options {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 500px;
+}
+
+button {
+  font-family: 'Roboto Slab', sans-serif;
+  padding: 1rem;
+  margin: .5rem;
+  font-size: 1.6rem;
+  border-radius: 1rem; 
+  border: none;
+}
+
+label {
+  font-size: 1.6rem;
+  margin-right: .5rem;
+}
+
+select {
+  padding: 1rem;
+  border-radius: 1rem;
+  font-family: 'Roboto Slab', sans-serif;
+  font-size: 1.6rem;
+}
+
+option {
+  border-radius: 1rem;
+}
