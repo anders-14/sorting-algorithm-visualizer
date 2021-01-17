@@ -1,12 +1,20 @@
-# Sorting Visualizer
+# Sorting Algorithm Visualizer
 
-A website that visualizes different sorting algorithms.
+A web app for visualizing how different sorting algorithms sort.
 
-It is written in typescript.
+[web app](https://sortalgoviz.vercel.app)
 
 ## Current algorithms
 
 - Bubble sort
+- Insertion sort
 - Merge sort
 - Selection sort
 - Shell sort
+
+## Written in
+
+- TypeScript
+- HTML
+- CSS
+
