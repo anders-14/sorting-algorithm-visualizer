@@ -28,24 +28,32 @@ let running = false;
 
 // Function to create a bar and give it a random height
 const createBar = () => {
+  // Calc width
   const width = Math.floor(barWrapper.clientWidth / numberOfBars - 10);
+  // Random height
   const height = Math.floor(Math.random() * 450 + 5);
+  
+  // Create element, add classes and styles
   const element: HTMLDivElement = document.createElement('div');
   element.classList.add('bar');
   if (fancyAnimations) element.classList.add('fancy-animation');
   element.style.width = `${width}px`;
   element.style.height = `${height}px`;
-  barWrapper.appendChild(element);
 
+  // Add new bar
+  barWrapper.appendChild(element);
   barElements.push(element);
   barHeights.push(height);
 }
 
 // Draw the bars, used for initial and for redrawing
 const drawBars = () => {
+  // Clear old bars
   barWrapper.innerHTML = '';
   barElements = [];
   barHeights = [];
+
+  // Set new number and create bars
   numberOfBars = +barNumberInput.value;
   for (let i = 0; i < numberOfBars; i++) createBar();
   sorted = false;
@@ -97,7 +105,7 @@ algoSelect.addEventListener('change', () => selectedAlgorithm = algoSelect.value
 
 // Execute sort
 sortBtn.addEventListener('click', () => {
-  // Dont start a new if one is running
+  // Dont sort new, if one animations is running
   if (running) return;
 
   // If the bars are already sorted, generate new bars
