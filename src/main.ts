@@ -4,10 +4,13 @@ import { mergeSort } from './algorithms/mergeSort.js';
 import { selectionSort } from './algorithms/selectionSort.js';
 import { shellSort } from './algorithms/shellSort.js';
 
+// Wrapper
 const barWrapper = document.querySelector('#bar-wrapper')! as HTMLDivElement;
-// Sort buttons
+
+// Sort elements
 const sortBtn = document.querySelector('#sort')! as HTMLButtonElement;
 const algoSelect = document.querySelector('#algo-select')! as HTMLSelectElement; 
+
 // Options
 const barNumberInput = document.querySelector('#number-of-bars')! as HTMLInputElement;
 const regenerateBtn = document.querySelector('#regenrate-btn')! as HTMLButtonElement;
@@ -17,15 +20,16 @@ const fancyAnimationsCheck = document.querySelector('#fancy-animation-check')! a
 let barElements: Array<HTMLDivElement> = [];
 let barHeights: Array<number> = [];
 
-// options
 let fancyAnimations = false;
 let numberOfBars: number;
 let selectedAlgorithm: string = algoSelect.value;
+let sorted = false;
+let running = false;
 
 // Function to create a bar and give it a random height
 const createBar = () => {
-  const width = Math.floor(barWrapper.clientWidth / numberOfBars - 5);
-  const height = Math.floor(Math.random() * 480 + 5);
+  const width = Math.floor(barWrapper.clientWidth / numberOfBars - 10);
+  const height = Math.floor(Math.random() * 450 + 5);
   const element: HTMLDivElement = document.createElement('div');
   element.classList.add('bar');
   if (fancyAnimations) element.classList.add('fancy-animation');
@@ -44,13 +48,14 @@ const drawBars = () => {
   barHeights = [];
   numberOfBars = +barNumberInput.value;
   for (let i = 0; i < numberOfBars; i++) createBar();
+  sorted = false;
 }
 
 // Takes an array of animations, an index and the height, and animates the sorting
 const animate = (animations: Array<[number, number]>, i: number = 0, ) => {
   // Change the color of the bars that are changed
-  barElements[animations[i][0]].classList.toggle('red');
-  barElements[animations[i+1][0]].classList.toggle('green');
+  barElements[animations[i][0]].classList.add('red');
+  barElements[animations[i+1][0]].classList.add('green');
 
   // Animate the bars that changed.
   barElements[animations[i][0]].style.height = animations[i][1] + 'px';
@@ -60,19 +65,21 @@ const animate = (animations: Array<[number, number]>, i: number = 0, ) => {
   if (i + 2 < animations.length -1) {
     setTimeout(() => {
       // Remove color
-      barElements[animations[i][0]].classList.toggle('red');
-      barElements[animations[i+1][0]].classList.toggle('green');
+      barElements[animations[i][0]].classList.remove('red');
+      barElements[animations[i+1][0]].classList.remove('green');
 
       animate(animations, i+2);
     }, 10);
   } else {
     // Remove leftover color
-    barElements[animations[i][0]].classList.toggle('red');
-    barElements[animations[i+1][0]].classList.toggle('green');
+    barElements[animations[i][0]].classList.remove('red');
+    barElements[animations[i+1][0]].classList.remove('green');
+
+    running = false;
   }
 }
 
-// I regenerate i clicked or number of bars i changed, redraw
+// Regenerate if amount changed or regenerate is clicked
 regenerateBtn.addEventListener('click', drawBars);
 barNumberInput.addEventListener('change', () => {
   drawBars();
@@ -90,32 +97,27 @@ algoSelect.addEventListener('change', () => selectedAlgorithm = algoSelect.value
 
 // Execute sort
 sortBtn.addEventListener('click', () => {
-  if (selectedAlgorithm === 'bubble-sort') {
-    const animations = bubbleSort(barHeights);
-    animate(animations)
-    return;
+  // Dont start a new if one is running
+  if (running) return;
+
+  // If the bars are already sorted, generate new bars
+  if (sorted) {
+    drawBars();
   }
-  if (selectedAlgorithm === 'insertion-sort') {
-    const animations = insertionSort(barHeights);
-    animate(animations);
-    return;
-  }
-  if (selectedAlgorithm === 'merge-sort') {
-    const animations = mergeSort(barHeights);
-    animate(animations)
-    return;
-  }
-  if (selectedAlgorithm === 'selection-sort') {
-    const animations = selectionSort(barHeights);
-    animate(animations)
-    return;
-  }
-  if (selectedAlgorithm === 'shell-sort') {
-    const animations = shellSort(barHeights);
-    animate(animations);
-    return;
-  }
+
+  let animations: Array<[number, number]> = [];
+
+  if (selectedAlgorithm === 'bubble-sort') animations = bubbleSort(barHeights);
+  else if (selectedAlgorithm === 'insertion-sort') animations = insertionSort(barHeights);
+  else if (selectedAlgorithm === 'merge-sort') animations = mergeSort(barHeights);
+  else if (selectedAlgorithm === 'selection-sort') animations = selectionSort(barHeights);
+  else if (selectedAlgorithm === 'shell-sort') animations = shellSort(barHeights);
+
+  sorted = true;
+  running = true;
+  barElements.forEach(el => el.classList.remove('red', 'green'));
+  animate(animations);
 });
 
 // Draw the bars
-drawBars();
+window.onload = drawBars;
