@@ -1,4 +1,5 @@
 import { bubbleSort } from './algorithms/bubbleSort.js';
+import { insertionSort } from './algorithms/insertionSort.js';
 import { mergeSort } from './algorithms/mergeSort.js';
 import { selectionSort } from './algorithms/selectionSort.js';
 import { shellSort } from './algorithms/shellSort.js';
@@ -92,6 +93,11 @@ sortBtn.addEventListener('click', () => {
   if (selectedAlgorithm === 'bubble-sort') {
     const animations = bubbleSort(barHeights);
     animate(animations)
+    return;
+  }
+  if (selectedAlgorithm === 'insertion-sort') {
+    const animations = insertionSort(barHeights);
+    animate(animations);
     return;
   }
   if (selectedAlgorithm === 'merge-sort') {
