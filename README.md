@@ -2,9 +2,9 @@
 
 A web app for visualizing how different sorting algorithms sort.
 
-[web app](https://sortalgoviz.vercel.app)
+[sortalgoviz.vercel.app](https://sortalgoviz.vercel.app)
 
-## Current algorithms
+## Sorting Algorithms
 
 - Bubble sort
 - Insertion sort
@@ -17,4 +17,9 @@ A web app for visualizing how different sorting algorithms sort.
 - TypeScript
 - HTML
 - CSS
+
+## What I learned?
+
+- Learned about different sorting algorithms
+- Got more comfortable using TypeScript
 
